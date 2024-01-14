@@ -1,0 +1,54 @@
+﻿@model List<StartHotell.Models.BookingModel>
+@{
+    ViewBag.Title = "Booking";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Footerjs{
+    <script src="~/asses/Clien/js/common/Booking.js"></script>
+}
+
+<div class="content">
+    <div class="section group">
+        <div class="table-group " style="margin-top:100px;">
+            @if (Model.Count > 0)
+            {
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Mã Phòng</th>
+                            <th scope="col">Tên Khách sạn</th>
+                            <th scope="col">Ảnh SP</th>
+                            <th scope="col">Số Lượng</th>
+                            <th scope="col">Đơn giá</th>
+                            <th scope="col">Thành Tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <th>@item.Product.ID</th>
+                                <th>@item.Product.Name</th>
+                                <th><img src="@item.Product.Image" width="100"></th>
+                                <th><input type="text" class="quantity" data-id="@item.Product.ID" value="@item.Quantity" /></th>
+                                <th>@item.Product.Price.GetValueOrDefault(0).ToString("N0")</th>
+                                <th>@((item.Product.Price.GetValueOrDefault(0) * item.Quantity).ToString("N0"))</th>
+                                <th><a href="#" data-id="@item.Product.ID" class="btn-delete"> Xóa</a></th>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+                <button id="btnContinue" class="btn">Tiếp tục Đặt phòng </button>
+                <button id="btnUpdate" class="btn">Cập nhật Danh Sánh </button>
+                <button id="btnDeleteAll" class="btn">Xóa Danh Sánh </button>
+                <button id="btnPayment" class="btn">Thanh toán </button>
+            }
+            else
+            {
+                <span class="alert-danger">chưa có sản phẩm nào trong giỏ hàng</span>
+            }
+        </div>
+    </div>
+</div>

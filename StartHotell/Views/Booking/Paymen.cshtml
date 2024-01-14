@@ -1,0 +1,63 @@
+﻿@model List<StartHotell.Models.BookingModel>
+@{
+    ViewBag.Title = "Thanh toán";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content">
+    <div class="section group">
+        @if (Model.Count > 0)
+        {
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Mã Phòng</th>
+                        <th scope="col">Tên Khách sạn</th>
+                        <th scope="col">Ảnh SP</th>
+                        <th scope="col">Số Lượng</th>
+                        <th scope="col">Đơn giá</th>
+                        <th scope="col">Thành Tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <th>@item.Product.ID</th>
+                            <th>@item.Product.Name</th>
+                            <th><img src="@item.Product.Image" width="100"></th>
+                            <th><input type="text" class="quantity" data-id="@item.Product.ID" value="@item.Quantity" /></th>
+                            <th>@item.Product.Price.GetValueOrDefault(0).ToString("N0")</th>
+                            <th>@((item.Product.Price.GetValueOrDefault(0) * item.Quantity).ToString("N0"))</th>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        }
+        <div class="section group">
+            <div class="col-md-6">
+                @using (Html.BeginForm("Paymen", "Booking", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <label> Nhận phòng:</label>
+                        <input type="date" name="CheckIn">
+                    </div>
+                    <div class="form-group">
+                        <label >Trả Phòng :</label>
+                        <input type="date" name="CheckOut">
+                    </div>
+                    <div class="form-group">
+                        <label>Số Người lớn</label>
+                        <input name="adult" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Số Trẻ em</label>
+                        <input name="Child" class="form-control" />
+                    </div>
+                    <button type="submit" class="btn"> Thanh toán</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
