@@ -1,0 +1,43 @@
+﻿@model IPagedList<Model.FE.Product>
+@using PagedList;
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Phong";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model != null && Model.Any())
+{
+    <div class="container" style="margin-top:100px; margin-bottom: 100px">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-warning text-white"><< Back to Home</a>
+        <div class="section_title text-center">
+            <h2 class="title_color">Danh sách các phòng</h2>
+        </div>
+        <div class="row mb_30">
+            @foreach (var item in Model)
+            {
+                var url = "/chi-tiet/" + item.ID;
+                <div class="col-lg-3 col-sm-6">
+                    <div class="accomodation_item text-center" style="margin-bottom: 40px">
+                        <div class="hotel_img">
+                            <a href="@url">
+                                <img href="@url" src="@item.Image" alt="">
+                            </a>
+                            <a href="/them-danh-sach?ProductID=@item.ID&Quantity=1" class="btn theme_btn button_hover">Đặt Ngay</a>
+                        </div>
+                        <a href="#"><h4 class="sec_h4">@item.Name</h4></a>
+                        <h5>@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên Hệ")<small>/Tối</small></h5>
+                    </div>
+                </div>
+            }
+
+        </div>
+        @Html.PagedListPager(Model, page => Url.Action("Phong", new { page, pageSize = ViewBag.PageSize }))
+    </div>
+
+}
+
+
+

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace StartHotell.Controllers
 {
@@ -24,7 +25,42 @@ namespace StartHotell.Controllers
             }
             return View(list);
         }
+        public JsonResult DeleteAll()
+        {
+            Session[BookingSession] = null;
+            return Json(new
+            {
+                status = true
+            });
+        }
+        public JsonResult Delete(long id)
+        {
+            var sessionCart = (List<BookingModel>)Session[BookingSession];
+            sessionCart.RemoveAll(x => x.Product.ID == id);
+            Session[BookingSession] = sessionCart;
+            return Json(new
+            {
+                status = true
+            });
+        }
+        public JsonResult Update(string cartModel)
+        {
+            var jsoncart = new JavaScriptSerializer().Deserialize<List<BookingModel>>(cartModel);
+            var sessionCart = (List<BookingModel>)Session[BookingSession];
 
+            foreach (var item in sessionCart)
+            {
+                var jsonItem = jsoncart.SingleOrDefault(x => x.Product.ID == item.Product.ID);
+                if (jsonItem != null)
+                {
+                    item.Quantity = jsonItem.Quantity;
+                }
+            }
+            return Json(new
+            {
+                status = true
+            });
+        }
         public ActionResult AddItemt(long ProductId , int Quantity)
         {
             var booking = Session[BookingSession];
@@ -74,14 +110,20 @@ namespace StartHotell.Controllers
             return View(list);
         }
         [HttpPost]
-        public ActionResult Paymen(DateTime checkin ,DateTime checkout,string adult ,string Child )
+        public ActionResult Paymen(string customername, DateTime checkin, DateTime checkout, string adult, string Child, int Number_of_room , bool? NonSmoking,bool? DoubleBed, bool? SingleBed, bool? ConnectingRooms, bool? FloorPreference)
         {
-            //if (User.Identity.IsAuthenticated)
             var book = new Book();
+            book.CustomerName = customername;
             book.Check_In = checkin;
             book.Check_out = checkout;
             book.Adult = adult;
             book.Child = Child;
+            book.Number_of_room = Number_of_room;
+            book.NonSmoking = NonSmoking ?? false;
+            book.DoubleBed = DoubleBed ?? false;
+            book.SingleBed = SingleBed ?? false;
+            book.ConnectingRooms = ConnectingRooms ?? false;
+            book.FloorPreference = FloorPreference ?? false;
             decimal total = 0;
             try
             {
@@ -100,13 +142,15 @@ namespace StartHotell.Controllers
                     total += (item.Product.Price.GetValueOrDefault(0) * item.Quantity);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return Redirect("/loi-thanh-toan");
             }
-           
+
             return Redirect("/hoan-thanh");
         }
+
+
         public ActionResult Success()
         {
             return View();

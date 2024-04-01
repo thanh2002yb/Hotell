@@ -1,0 +1,109 @@
+﻿@model Model.FE.Product
+
+@{
+    ViewBag.Title = "ProductDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .back, .next {
+        position: absolute;
+        top: 40%;
+        padding: 22px;
+        font-size: 29px;
+        color: #ccc;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .back {
+        left: 15px;
+        border-radius: 0 6px 6px 0;
+    }
+
+    .next {
+        right: 15px;
+        border-radius: 6px 0 0 6px;
+    }
+
+        .back:hover, .next:hover {
+            background: rgba(0,0,0,0.1);
+        }
+</style>
+
+<div class="container" style="margin-top:90px; margin-bottom: 90px">
+    <a href="@Url.Action("Index", "Home")" class="btn btn-warning text-white mb-5"><< Back to Home</a>
+    <div class="row">
+        <div class="col-lg-6">
+            <img src="@Model.Image" alt="Alternate Text" class="product-img" style="position: relative; width: 100%; max-width: 100%; height: 100%; object-fit:cover" />
+            <a class="back" onclick="back()">&#10094;</a>
+            <a class="next" onclick="next()">&#10095;</a>
+        </div>
+        <div class="col-lg-6 d-flex flex-column justify-content-around">
+            <h1 class="text-dark">@Model.Name</h1>
+            <h3 style="color:aqua">@(Model.Price.HasValue ? Model.Price.Value.ToString("N0") : "Liên Hệ") VND <small>/Tối</small></h3>
+            <h4>Địa chỉ: <span style="color:blue">@Model.Description</span></h4>
+            @Html.Raw(Model.Detail)
+        <p>
+            @if (Model.Status == true)
+            {
+                <span style="color:black; font-weight:bolder">Trạng thái:  <span style="font-size: 16px; font-weight:bold; color:#9e9e28eb">Còn phòng</span></span>
+                <h4>Bạn yêu cầu nào không?</h4>
+                <span>Khi nhận phòng, khách sạn sẽ thông báo liệu yêu cầu này có được đáp ứng hay không. Một số yêu cầu cần trả thêm phí để sử dụng nhưng bạn hoàn toàn có thể hủy yêu cầu sau đó.</span>
+                <div>
+                    <input type="checkbox" id="contactChoice1" name="contact" />
+                    <label  style=" margin-right: 20px; font-weight: bold"  for="contactChoice1">Phòng không hút thuốc</label>
+
+                    <input type="checkbox" id="contactChoice2" name="contact" />
+                    <label  style=" margin-right: 20px; font-weight:bold" for="contactChoice2">Phòng liên thông</label>
+
+                    <input type="checkbox" id="contactChoice3" name="contact" />
+                    <label style=" margin-right: 20px; font-weight:bold" for="contactChoice3">Tầng lầu</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="contactChoice3" name="contact" />
+                    <label style=" margin-right: 20px; font-weight: bold" for="contactChoice3">Giường đôi</label>
+
+                    <input type="checkbox" id="contactChoice2" name="contact" />
+                    <label style=" margin-right: 20px; font-weight: bold" for="contactChoice2">Giường đơn</label>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <a href="/them-danh-sach?ProductID=@Model.ID&Quantity=1" class="btn theme_btn button_hover" style="display:inline-block; width:100%; max-width:100%; height:100%">Đặt Ngay</a>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <span style="color:black; font-weight:bolder">Trạng thái: Hết phòng</span>
+            }
+        </p>
+        </div>
+    </div>
+</div>
+
+<script>
+    let image = document.querySelector('.product-img')
+    console.log(image)
+
+    let phong = ['@Model.Image', '/asses/Clien/image/phong1.jpg', '/asses/Clien/image/phong2.jpg', '/asses/Clien/image/phong3.jpg']
+
+    let index = 0
+    function back() {
+        index--
+        if (index < 0) {
+            index = phong.length - 1
+        }
+        image.src = phong[index]
+    }
+
+    function next() {
+        index++
+        index %= phong.length
+        image.src = phong[index]
+    }
+
+</script>
+
+
+
+

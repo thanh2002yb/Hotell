@@ -27,6 +27,10 @@ namespace Model.FE
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Book>()
+                .Property(e => e.CustomerName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Book>()
                 .Property(e => e.Adult)
                 .IsUnicode(false);
 

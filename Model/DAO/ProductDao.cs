@@ -22,5 +22,13 @@ namespace Model.DAO
         {
             return db.Products.Find(id);
         }
+        public List<Product> ListProducts()
+        {
+            return db.Products.OrderBy(x => x.CreatedDate).ToList();
+        }
+        public List<Product> ListFeatureProduct(int top)
+        {
+            return db.Products.Where(x => x.TopHot != null && x.TopHot > DateTime.Now).OrderByDescending(x => x.CreatedDate).Take(top).ToList();
+        }
     }
 }

@@ -81,5 +81,15 @@ namespace StartHotell.Areas.Admin.Controllers
 
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public JsonResult ChageStatus(long id)
+        {
+            var result = new UserDao().chagestatus(id);
+            return Json(new
+            {
+                status = result
+            });
+        }
+
     }
 }

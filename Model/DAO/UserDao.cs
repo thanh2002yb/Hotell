@@ -79,5 +79,20 @@ namespace Model.DAO
                 }
             }
         }
+        public bool chagestatus(long id)
+        {
+            var user = db.Users.Find(id);
+            user.Status = !user.Status;
+            db.SaveChanges();
+            return user.Status;
+        }
+        public bool Checkusername(string username)
+        {
+            return db.Users.Count(x => x.UserName == username) > 0;
+        }
+        public bool Checkemail(string email)
+        {
+            return db.Users.Count(x => x.Email == email) > 0;
+        }
     }
 }

@@ -20,6 +20,7 @@ namespace StartHotell
                namespaces: new[] { "StartHotell.Controllers" }
 
             );
+
             routes.MapRoute(
                 name: "Success",
                 url: "hoan-thanh",
@@ -29,12 +30,49 @@ namespace StartHotell
              );
 
             routes.MapRoute(
-               name: "Add L",
+               name: "Add Liss",
                url: "them-danh-sach",
                defaults: new { controller = "Booking", action = "AddItemt", id = UrlParameter.Optional },
                namespaces: new[] { "StartHotell.Controllers" }
 
             );
+            routes.MapRoute(
+               name: "Liss",
+               url: "danh-sach",
+               defaults: new { controller = "Booking", action = "Index", id = UrlParameter.Optional },
+               namespaces: new[] { "StartHotell.Controllers" }
+
+            );
+            routes.MapRoute(
+               name: "Phong",
+               url: "phong",
+               defaults: new { controller = "Home", action = "Phong" },
+               namespaces: new[] { "StartHotell.Controllers" }
+
+              );
+
+            routes.MapRoute(
+                 name: "ProductDetail",
+                 url: "chi-tiet/{id}",
+                 defaults: new { controller = "Home", action = "ProductDetail", id = UrlParameter.Optional },
+                 namespaces: new[] { "StartHotell.Controllers" }
+
+              );
+
+            routes.MapRoute(
+                name: "Register",
+                url: "dang-ky",
+                defaults: new { controller = "User", action = "Register", id = UrlParameter.Optional },
+                namespaces: new[] { "StartHotell.Controllers" }
+
+             );
+            routes.MapRoute(
+                name: "Login",
+                url: "dang-nhap",
+                defaults: new { controller = "User", action = "Login", id = UrlParameter.Optional },
+                namespaces: new[] { "StartHotell.Controllers" }
+
+             );
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

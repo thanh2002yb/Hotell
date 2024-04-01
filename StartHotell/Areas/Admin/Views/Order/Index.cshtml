@@ -1,0 +1,86 @@
+﻿@model List<Model.FE.Book>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Quản Lý Đơn Hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    Danh sách Đơn
+    <!DOCTYPE html>
+    <html lang="en">
+    <body id="page-top">
+
+        <!-- Page Wrapper -->
+        <!-- End of Page Wrapper -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+        <div id="content">
+            <!-- End of Topbar -->
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Tên Khách Hàng</th>
+                                        <th>Ngày Nhận Phòng</th>
+                                        <th>Ngày Trả Phòng</th>
+                                        <th>Số Điện Thoại</th>
+                                        <th>Số người lớn</th>
+                                        <th>Số trẻ em</th>
+                                        <th>Số Phòng</th>
+                                        <th>Phòng không hút thuốc</th>
+                                        <th>Giường đôi</th>
+                                        <th>Giường đơn</th>
+                                        <th>Giường đôi</th>
+                                        <th>Giường đơn</th>
+                                        <th>#</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.CustomerName</td>
+                                            <td>@item.Check_In</td>
+                                            <td>@item.Check_out</td>
+                                            <td>@item.Phone</td>
+                                            <td>@item.Adult</td>
+                                            <td>@item.Child</td>
+                                            <td>@item.Number_of_room</td>
+                                            <td>@(item.NonSmoking ?? false ? "Yes" : "No")</td>
+                                            <td>@(item.DoubleBed ?? false ? "Yes" : "No")</td>
+                                            <td>@(item.SingleBed ?? false ? "Yes" : "No")</td>
+                                            <td>@(item.ConnectingRooms ?? false ? "Yes" : "No")</td>
+                                            <td>@(item.FloorPreference ?? false ? "Yes" : "No")</td> 
+                                            <td>
+                                                @Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions
+                                                {
+                                                Confirm = "Bạn có muốn xóa bản ghi này",
+                                                OnComplete = "$('row_" + item.ID + "').remove()",
+                                                HttpMethod = "Delete"
+                                                })
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+    </body>
+
+</html>
+}
+

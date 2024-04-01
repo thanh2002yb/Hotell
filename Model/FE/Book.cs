@@ -11,11 +11,17 @@ namespace Model.FE
     {
         public long ID { get; set; }
 
-        public long? CustomerID { get; set; }
+        public long CustomerID { get; set; }
+
+        [StringLength(50)]
+        public string CustomerName { get; set; }
 
         public DateTime? Check_In { get; set; }
 
         public DateTime? Check_out { get; set; }
+
+        [StringLength(50)]
+        public string Phone { get; set; }
 
         [StringLength(50)]
         public string Adult { get; set; }
@@ -24,6 +30,16 @@ namespace Model.FE
 
         [StringLength(50)]
         public string Child { get; set; }
+
+        public bool? NonSmoking { get; set; }
+
+        public bool? DoubleBed { get; set; }
+
+        public bool? SingleBed { get; set; }
+
+        public bool? ConnectingRooms { get; set; }
+
+        public bool? FloorPreference { get; set; }
 
         public int? status { get; set; }
     }

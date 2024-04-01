@@ -67,7 +67,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Components:</h6>
                         <a class="collapse-item" href="/Admin/User/Index">User</a>
-                        <a class="collapse-item" href="cards.html">Book</a>
+                        <a class="collapse-item" href="~/Admin/Order/Index">Book</a>
                     </div>
                 </div>
             </li>
@@ -171,7 +171,6 @@
             </div>
             <!-- End of Main Content -->
             <!-- Footer -->
-
             <!-- End of Footer -->
 
         </div>
@@ -220,7 +219,7 @@
     <!-- Page level custom scripts -->
     <script src="/asses/admin/js/demo/chart-area-demo.js"></script>
     <script src="/asses/admin/js/demo/chart-pie-demo.js"></script>
-
+    @RenderSection("Footerjs", required: false)
 </body>
 
 </html>

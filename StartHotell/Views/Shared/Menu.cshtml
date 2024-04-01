@@ -1,8 +1,28 @@
 ﻿@model List<Model.FE.Menu>
 
-<ul class="nav navbar-nav menu_nav ml-auto">
-    @foreach (var item in Model)
-    {
-        <li class="nav-item active"><a class="nav-link" href="@item.Link" target="@item.Taget">@item.Text</a></li>
+<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+    @{
+        var result = (StartHotell.Common.UserLogin)Session[StartHotell.Common.CommonConstants.USER_SESSION];
     }
-</ul>
+    @if (result == null)
+    {
+        <ul class="nav navbar-nav menu_nav ml-auto">
+            @foreach (var item in Model)
+            {
+                <li class="nav-item active"><a class="nav-link" href="@item.Link" target="@item.Taget">@item.Text</a></li>
+            }
+        </ul>
+    }
+    else
+    {
+        <ul class="nav navbar-nav menu_nav ml-auto">
+            <li class="nav-item active"><a class="nav-link" href="/" target="">TRANG CHỦ</a></li>
+            <li class="nav-item active"><a class="nav-link" href="gioi-thieu" target="">GIỚI THIỆU</a></li>
+            <li class="nav-item active"><a class="nav-link" href="tin-tuc" target="">TIN TỨC</a></li>
+            <li class="nav-item active"><a class="nav-link" href="phong" target="">PHÒNG</a></li>
+            <li class="nav-item active"><a class="nav-link" href="lien-he" target="">LIÊN HỆ</a></li>
+            <li class="nav-item active"><a class="nav-link">Xin chào:@result.UserName</a></li>
+            <li style=" margin-top: 27px;">@Html.ActionLink("Đăng xuất", "Logout", "User")</li>
+        </ul>
+    }
+</div>

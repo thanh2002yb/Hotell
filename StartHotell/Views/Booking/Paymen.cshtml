@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="content">
+<div class="content" style="margin-top:10%;">
     <div class="section group">
         @if (Model.Count > 0)
         {
@@ -30,9 +30,11 @@
                             <th>@item.Product.Price.GetValueOrDefault(0).ToString("N0")</th>
                             <th>@((item.Product.Price.GetValueOrDefault(0) * item.Quantity).ToString("N0"))</th>
                         </tr>
-                    }
-
+                    
+                        }
+                
                 </tbody>
+
             </table>
         }
         <div class="section group">
@@ -40,11 +42,15 @@
                 @using (Html.BeginForm("Paymen", "Booking", FormMethod.Post))
                 {
                     <div class="form-group">
+                        <label>Tên người đặt</label>
+                        <input name="CustomerName" class="form-control" />
+                    </div>
+                    <div class="form-group">
                         <label> Nhận phòng:</label>
                         <input type="date" name="CheckIn">
                     </div>
                     <div class="form-group">
-                        <label >Trả Phòng :</label>
+                        <label>Trả Phòng :</label>
                         <input type="date" name="CheckOut">
                     </div>
                     <div class="form-group">
@@ -54,6 +60,33 @@
                     <div class="form-group">
                         <label>Số Trẻ em</label>
                         <input name="Child" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Số phòng</label>
+                        <input name="Number_of_room" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Tùy chọn phòng:</label>
+                        <div>
+                            <input type="checkbox" id="nonSmoking" name="NonSmoking" value="true">
+                            <label for="nonSmoking">Phòng không hút thuốc</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="doubleBed" name="DoubleBed" value="true">
+                            <label for="doubleBed">Giường đôi</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="singleBed" name="SingleBed" value="true">
+                            <label for="singleBed">Giường đơn</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="connectingRooms" name="ConnectingRooms"  value="true">
+                            <label for="connectingRooms">Phòng liên thông</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="floorPreference" name="FloorPreference" value="true">
+                            <label for="floorPreference">Tầng lầu</label>
+                        </div>
                     </div>
                     <button type="submit" class="btn"> Thanh toán</button>
                 }

@@ -11,12 +11,14 @@
     <link rel="stylesheet" href="/asses/Clien/vendors/linericon/style.css">
     <link rel="stylesheet" href="/asses/Clien/css/font-awesome.min.css">
     <link rel="stylesheet" href="/asses/Clien/vendors/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/asses/Clien/vendors/bootstrap-datepicker/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="/asses/Clien/vendors/nice-select/css/nice-select.css">
     <link rel="stylesheet" href="/asses/Clien/vendors/owl-carousel/owl.carousel.min.css">
     <!-- main css -->
     <link rel="stylesheet" href="/asses/Clien/css/style.css">
     <link rel="stylesheet" href="/asses/Clien/css/responsive.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
 </head>
 <body>
     <!--================Header Area =================-->
@@ -24,16 +26,16 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <!-- Brand and toggle get grouped for better mobile display -->
-                <a class="navbar-brand logo_h" href="index.html"><img src="/asses/Clien/image/Logo.png" alt=""></a>
+                <a class="navbar-brand logo_h" href="/"><img src="/asses/Clien/image/Logo.png" alt=""></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-                    @{Html.RenderAction("Menu", "Home");}
-                </div>
+
+                @{Html.RenderAction("Menu", "Home");}
+
             </nav>
         </div>
     </header>
@@ -136,6 +138,10 @@
     <script src="/asses/Clien/js/stellar.js"></script>
     <script src="/asses/Clien/vendors/lightbox/simpleLightbox.min.js"></script>
     <script src="/asses/Clien/js/custom.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/0.11.1/typeahead.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.jquery.min.js"></script>
+    <script src="~/Scripts/search.js"></script>
     @RenderSection("Footerjs", required: false)
 </body>
 </html>
